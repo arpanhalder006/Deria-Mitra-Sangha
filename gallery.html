@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo & Video Gallery | Deria Mitra Sangha (ESTD - 1991)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="Deria Mitra Sangha Logo.png">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="brand">
+        <img src="Deria Mitra Sangha Logo.png" alt="Deria Mitra Sangha Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">Deria <span>Mitra</span> Sangha</span>
+          <span class="brand-sub">ESTD - 1991 &bull; <span class="bengali-sub">দেড়িয়া মিত্র সংঘ</span></span>
+        </div>
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="events.html" class="nav-link">Events & Social</a></li>
+        <li><a href="gallery.html" class="nav-link active">Photos & Videos</a></li>
+        <li><a href="notices.html" class="nav-link">Notices</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="admin.html" class="btn-admin-nav">🔐 Admin Panel</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Banner -->
+  <div class="page-banner">
+    <div class="container">
+      <span class="badge-pill">Media Archives</span>
+      <h1>Photos & Video Gallery</h1>
+      <p>Explore high-resolution photography and video highlights from our festivals, sports championships, and charitable campaigns.</p>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Top Action Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; flex-wrap:wrap; gap:16px;">
+        <div>
+          <h2 style="font-size:1.8rem; font-weight:800; color:var(--dark-bg);">Archive Highlights</h2>
+          <p style="color:var(--text-muted); font-size:0.95rem;">Click on any item to view high-resolution image or play video.</p>
+        </div>
+        <div>
+          <a href="admin.html" class="btn btn-primary btn-sm">➕ Upload Photos / Add Videos (Admin)</a>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">🌟 All Media</button>
+        <button class="filter-btn" data-filter="photos">📷 Photos Only</button>
+        <button class="filter-btn" data-filter="videos">🎬 Videos Only</button>
+        <button class="filter-btn" data-filter="festivals">🪔 Festivals & Puja</button>
+        <button class="filter-btn" data-filter="sports">⚽ Sports</button>
+        <button class="filter-btn" data-filter="social service">🩸 Social Service</button>
+        <button class="filter-btn" data-filter="charity">🤝 Charity & Aid</button>
+      </div>
+
+      <!-- Dynamic Media Grid -->
+      <div id="gallery-media-grid" class="media-grid">
+        <!-- Rendered dynamically by main.js from ClubDB -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-brand">
+          <h3>Deria Mitra Sangha</h3>
+          <p style="font-size:0.92rem; line-height:1.7;">A premier non-political social and cultural organization established in 1991.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="events.html">Events & Drives</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Resources</h4>
+          <ul class="footer-nav">
+            <li><a href="notices.html">Notices</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="admin.html">Admin Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <p style="font-size:0.9rem;">📍 West Bengal, India</p>
+          <p style="font-size:0.9rem;">📞 +91 98765 43210</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span>Deria Mitra Sangha (ESTD - 1991)</span>. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="db.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

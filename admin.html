@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Management Portal | Deria Mitra Sangha (ESTD - 1991)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="Deria Mitra Sangha Logo.png">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="index.html" class="brand">
+        <img src="Deria Mitra Sangha Logo.png" alt="Deria Mitra Sangha Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">Deria <span>Mitra</span> Sangha</span>
+          <span class="brand-sub">ESTD - 1991 &bull; <span class="bengali-sub">অ্যাডমিন প্যানেল</span></span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li><a href="notices.html" class="nav-link">Notices</a></li>
+        <li><a href="admin.html" class="btn-admin-nav active">🔐 Admin Portal</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="container section">
+
+    <!-- 1. LOGIN SCREEN -->
+    <div id="admin-login-wrapper">
+      <div class="admin-auth-container">
+        <img src="Deria Mitra Sangha Logo.png" alt="Logo" style="max-height:80px; margin-bottom:18px;">
+        <h2>Deria Mitra Sangha</h2>
+        <p>Executive Content Management System</p>
+
+        <form id="admin-login-form">
+          <div class="form-group" style="text-align:left;">
+            <label class="form-label">Enter Admin Password:</label>
+            <div style="position:relative;">
+              <input type="password" id="admin-password-input" class="form-control" placeholder="Enter admin password..." required autofocus>
+              <button type="button" onclick="togglePassVisibility()" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:1.1rem;" title="Show/Hide Password"></button>
+            </div>
+            <div id="login-error-alert" style="display:none; color:#dc2626; font-size:0.86rem; font-weight:700; margin-top:8px;"></div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            Unlock Admin Dashboard ➔
+          </button>
+          <p style="font-size:0.8rem; color:#94A3B8; margin-top:14px;">Authorized Club Personnel Only</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- 2. LOGGED-IN DASHBOARD -->
+    <div id="admin-dashboard-wrapper" style="display:none;">
+
+      <!-- Top Dashboard Header -->
+      <div class="admin-header-dashboard">
+        <div>
+          <h2 style="font-size:1.5rem; margin-bottom:4px;">Administration Management Hub</h2>
+          <span style="font-size:0.88rem; color:var(--secondary);">Authenticated as: <strong>Chief Administrator</strong> &bull; Changes reflect live on website</span>
+        </div>
+        <div>
+          <button class="btn btn-outline btn-sm" onclick="handleAdminLogout()">🚪 Logout</button>
+        </div>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="admin-dashboard-tabs">
+        <button id="tab-btn-photo" class="admin-tab-btn active" onclick="switchAdminTab('photo')">📷 Upload Photos</button>
+        <button id="tab-btn-video" class="admin-tab-btn" onclick="switchAdminTab('video')">🎬 Add Videos (YouTube)</button>
+        <button id="tab-btn-notice" class="admin-tab-btn" onclick="switchAdminTab('notice')">📢 Publish Notice</button>
+        <button id="tab-btn-event" class="admin-tab-btn" onclick="switchAdminTab('event')">🏆 Schedule Event</button>
+        <button id="tab-btn-manage" class="admin-tab-btn" onclick="switchAdminTab('manage')">⚙️ Manage & Edit All Data</button>
+      </div>
+
+      <!-- TAB 1: UPLOAD PHOTO -->
+      <div id="panel-photo" class="admin-view-panel active">
+        <div class="admin-card">
+          <h3 style="font-size:1.35rem; color:var(--dark-bg); margin-bottom:20px;">📷 Upload New Photo to Gallery</h3>
+          
+          <form id="form-add-photo">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div class="form-group">
+                <label class="form-label">Photo Title *</label>
+                <input type="text" id="photo-title" class="form-control" placeholder="e.g. Annual Durga Puja Inauguration 2026" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category *</label>
+                <select id="photo-category" class="form-control" required>
+                  <option value="Festivals">Festivals & Celebrations</option>
+                  <option value="Sports">Sports & Tournaments</option>
+                  <option value="Social Service">Social Service & Health</option>
+                  <option value="Charity">Charity & Distribution</option>
+                  <option value="Cultural">Cultural Programmes</option>
+                  <option value="General">General Activities</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div class="form-group">
+                <label class="form-label">Choose Image from Device (Phone/PC) *</label>
+                <input type="file" id="photo-file-input" class="form-control" accept="image/*">
+                <small style="color:var(--text-muted); font-size:0.8rem;">Automatic smart compression ensures photos load instantly.</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Or Direct Image URL (Optional):</label>
+                <input type="url" id="photo-url-input" class="form-control" placeholder="https://example.com/photo.jpg">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Caption / Description</label>
+              <textarea id="photo-caption" class="form-control" placeholder="Add a short caption describing the photo moment..."></textarea>
+            </div>
+
+            <div class="form-group" style="max-width:280px;">
+              <label class="form-label">Event Date</label>
+              <input type="date" id="photo-date" class="form-control">
+            </div>
+
+            <!-- Live Compression / Preview Box -->
+            <div id="photo-live-preview" style="display:none; margin:16px 0; padding:15px; background:#F8FAFC; border-radius:8px; border:1px solid var(--light-border);">
+              <img id="photo-preview-img" src="" alt="Preview" style="max-width:240px; max-height:160px; border-radius:6px; object-fit:cover; border:2px solid var(--secondary); display:block; margin-bottom:8px;">
+              <div id="photo-preview-info" style="font-size:0.88rem; color:var(--dark-bg);"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              💾 Save & Publish Photo
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 2: ADD VIDEO -->
+      <div id="panel-video" class="admin-view-panel">
+        <div class="admin-card">
+          <h3 style="font-size:1.35rem; color:var(--dark-bg); margin-bottom:20px;">🎬 Add Video to Gallery (YouTube Integration)</h3>
+
+          <form id="form-add-video">
+            <div class="form-group">
+              <label class="form-label">Video Title *</label>
+              <input type="text" id="video-title" class="form-control" placeholder="e.g. Highlights of Annual Sports Day Final Match" required>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div class="form-group">
+                <label class="form-label">YouTube Video Link (URL) *</label>
+                <input type="url" id="video-url-input" class="form-control" placeholder="https://www.youtube.com/watch?v=..." required>
+                <small style="color:var(--text-muted); font-size:0.8rem;">Paste any YouTube watch link or share link.</small>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category *</label>
+                <select id="video-category" class="form-control" required>
+                  <option value="Festivals">Festivals & Celebrations</option>
+                  <option value="Sports">Sports & Matches</option>
+                  <option value="Social Service">Social Service</option>
+                  <option value="Cultural">Cultural Performances</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Video Description</label>
+              <textarea id="video-desc" class="form-control" placeholder="Brief summary of what this video showcases..."></textarea>
+            </div>
+
+            <div class="form-group" style="max-width:280px;">
+              <label class="form-label">Recorded Date</label>
+              <input type="date" id="video-date" class="form-control">
+            </div>
+
+            <!-- Video Live Thumbnail Preview -->
+            <div id="video-live-preview" style="display:none; margin:16px 0; padding:15px; background:#F8FAFC; border-radius:8px; border:1px solid var(--light-border);">
+              <img id="video-preview-thumb" src="" alt="Thumbnail" style="max-width:260px; border-radius:6px; display:block; margin-bottom:8px;">
+              <div id="video-preview-status" style="font-size:0.88rem;"></div>
+            </div>
+
+            <button type="submit" class="btn btn-secondary">
+              🎬 Save Video to Portal
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 3: PUBLISH NOTICE -->
+      <div id="panel-notice" class="admin-view-panel">
+        <div class="admin-card">
+          <h3 style="font-size:1.35rem; color:var(--dark-bg); margin-bottom:20px;">📢 Issue Official Notice / Circular</h3>
+
+          <form id="form-add-notice">
+            <div class="form-group">
+              <label class="form-label">Notice Title *</label>
+              <input type="text" id="notice-title" class="form-control" placeholder="e.g. Extraordinary Meeting for Kali Puja Budget Allocation" required>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <input type="text" id="notice-category" class="form-control" placeholder="e.g. General Meeting, Health Camp, Sports" value="General">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Notice Date</label>
+                <input type="date" id="notice-date" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Notice Content / Full Message *</label>
+              <textarea id="notice-content" class="form-control" placeholder="Write the complete circular or meeting announcement details..." required></textarea>
+            </div>
+
+            <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+              <input type="checkbox" id="notice-urgent-check" style="width:20px; height:20px; cursor:pointer;">
+              <label for="notice-urgent-check" style="font-weight:700; color:var(--primary); cursor:pointer;">
+                🚨 Mark as Urgent / High Priority (Highlights in ticker & notice board)
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              📢 Publish Notice Live
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 4: ADD EVENT -->
+      <div id="panel-event" class="admin-view-panel">
+        <div class="admin-card">
+          <h3 style="font-size:1.35rem; color:var(--dark-bg); margin-bottom:20px;">🏆 Schedule Community Event or Drive</h3>
+
+          <form id="form-add-event">
+            <div class="form-group">
+              <label class="form-label">Event Name *</label>
+              <input type="text" id="event-title" class="form-control" placeholder="e.g. Free Blood Group & Eye Screening Camp 2026" required>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div class="form-group">
+                <label class="form-label">Date Schedule (Display Text) *</label>
+                <input type="text" id="event-date-display" class="form-control" placeholder="e.g. OCT 25 - 28, 2026" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Timing</label>
+                <input type="text" id="event-time" class="form-control" placeholder="e.g. 09:00 AM - 04:00 PM">
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+              <div class="form-group">
+                <label class="form-label">Venue / Location *</label>
+                <input type="text" id="event-venue" class="form-control" placeholder="e.g. Deria Mitra Sangha Grounds" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select id="event-category" class="form-control">
+                  <option value="Social Service">Social Service</option>
+                  <option value="Festivals">Festivals</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Charity">Charity</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Event Description</label>
+              <textarea id="event-desc" class="form-control" placeholder="Describe the program schedule, activities, and participation rules..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-secondary">
+              💾 Schedule Event
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 5: MANAGE & EDIT ALL DATA -->
+      <div id="panel-manage" class="admin-view-panel">
+        
+        <!-- Action Row -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h3 style="font-size:1.35rem; color:var(--dark-bg);">Central Content Management</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">You can Edit details or Delete any item directly from here.</p>
+          </div>
+          <div>
+            <button class="btn btn-outline btn-sm" onclick="resetClubData()" style="color:#DC2626; border-color:#DC2626;">
+              ⚠️ Restore Default Demo Data
+            </button>
+          </div>
+        </div>
+
+        <!-- 1. Photos Table -->
+        <div class="admin-card">
+          <h4 style="font-size:1.15rem; color:var(--dark-bg); margin-bottom:12px;">📷 Uploaded Photos</h4>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Preview</th>
+                  <th>Title & Caption</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-photo-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2. Videos Table -->
+        <div class="admin-card">
+          <h4 style="font-size:1.15rem; color:var(--dark-bg); margin-bottom:12px;">🎬 Linked Videos</h4>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Thumbnail</th>
+                  <th>Title & URL</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-video-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3. Notices Table -->
+        <div class="admin-card">
+          <h4 style="font-size:1.15rem; color:var(--dark-bg); margin-bottom:12px;">📢 Published Notices</h4>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Notice Title</th>
+                  <th>Summary</th>
+                  <th>Priority</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-notice-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 4. Events Table -->
+        <div class="admin-card">
+          <h4 style="font-size:1.15rem; color:var(--dark-bg); margin-bottom:12px;">🏆 Scheduled Events</h4>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Event Name</th>
+                  <th>Schedule</th>
+                  <th>Venue</th>
+                  <th>Category</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-event-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span>Deria Mitra Sangha (ESTD - 1991)</span>. Executive Administration.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function togglePassVisibility() {
+      const field = document.getElementById('admin-password-input');
+      field.type = field.type === 'password' ? 'text' : 'password';
+    }
+  </script>
+  <script src="db.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
